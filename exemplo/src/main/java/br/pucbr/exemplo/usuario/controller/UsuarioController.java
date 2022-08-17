@@ -1,34 +1,45 @@
 package br.pucbr.exemplo.usuario.controller;
 
 import br.pucbr.exemplo.usuario.entity.Usuario;
+import br.pucbr.exemplo.usuario.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    @PostMapping
-    public Usuario salvar(@RequestBody Usuario usuario) {
-        System.out.println(usuario);
+    @Autowired
+    UsuarioService usuarioService;
 
-        return usuario;
+    @PostMapping
+    public void salvar(@RequestBody Usuario usuario) {
+        usuarioService.salvar(usuario);
     }
 
     @GetMapping
     public List<Usuario> listar() {
-        Usuario u = new Usuario();
-        u.setId(1);
+        return usuarioService.listar();
+    }
 
-        List<Usuario> usuarios = new ArrayList<>();
-        usuarios.add(u);
-        return usuarios;
+    @GetMapping("/{id}")
+    public Usuario buscarPorId(@PathVariable("id") Integer id) {
+        return usuarioService.buscarPorId(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void excluir(@PathVariable("id") Integer id) {
+        usuarioService.excluir(id);
     }
 
 }

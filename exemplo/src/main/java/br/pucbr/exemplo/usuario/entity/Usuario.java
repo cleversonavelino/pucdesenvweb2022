@@ -1,5 +1,6 @@
 package br.pucbr.exemplo.usuario.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,8 +14,14 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @Column(name = "NOME", nullable = false)
     private String nome;
+
+    @Column(name = "LOGIN", nullable = false, unique = true)
     private String login;
+
+    @Column(name = "SENHA", nullable = false)
     private String senha;
 
     public Integer getId() {

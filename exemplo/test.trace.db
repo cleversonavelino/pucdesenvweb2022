@@ -86,3 +86,9 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
 	at br.pucbr.exemplo.ExemploApplication.main(ExemploApplication.java:10)
+2022-08-17 20:31:10 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (USUARIO: ""ID"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."USUARIO"("ID","LOGIN","NOME","SENHA")VALUES(?,?,?,?) [22018-214]
+2022-08-17 20:31:10 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (USUARIO: ""ID"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."USUARIO"("ID","LOGIN","NOME","SENHA")VALUES(?,?,?,?) [22018-214]
