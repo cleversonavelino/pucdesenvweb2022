@@ -3,6 +3,8 @@ package br.pucbr.exemplo.usuario.controller;
 import br.pucbr.exemplo.usuario.entity.Usuario;
 import br.pucbr.exemplo.usuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.websocket.server.PathParam;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/usuario")
@@ -23,8 +26,9 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @PostMapping
-    public void salvar(@RequestBody Usuario usuario) {
-        usuarioService.salvar(usuario);
+    public ResponseEntity<?> salvar(@RequestBody Usuario usuario) {
+        usuario = usuarioService.salvar(usuario);
+        return new ResponseEntity<>(usuario, HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -33,8 +37,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public Usuario buscarPorId(@PathVariable("id") Integer id) {
-        return usuarioService.buscarPorId(id);
+    public ResponseEntity<Usuario> buscarPorId(@PathVariable("id") Integer id) {
+        try {
+            Usuario usuario = usuarioService.buscarPorId(id);
+            return new ResponseEntity<>(usuario, HttpStatus.OK);
+        } catch (NoSuchElementException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/{id}")
