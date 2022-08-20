@@ -2,6 +2,8 @@ package br.pucbr.exemplo.usuario.controller;
 
 import br.pucbr.exemplo.usuario.entity.Usuario;
 import br.pucbr.exemplo.usuario.service.UsuarioService;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,11 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/usuario")
+@SecurityScheme(
+        name = "Bearer",
+        type = SecuritySchemeType.HTTP,
+        scheme = "bearer"
+)
 public class UsuarioController {
 
     @Autowired
