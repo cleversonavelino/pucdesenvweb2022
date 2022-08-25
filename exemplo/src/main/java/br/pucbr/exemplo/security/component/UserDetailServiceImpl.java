@@ -36,7 +36,14 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
         try {
 
-            UserDetails u = getCustomUser(userName);
+            UserDetails u = new CustomUser("cleverson",
+                    "$2a$12$LlxKRPHgE2I41V9o2hcN5ud.4dRUA67QCZhDUbh9C6GevJBoyoPo2",
+                    true,
+                    true,
+                    true,
+                    true,
+                    new ArrayList<>(),
+                    null);
 
             logger.info("Username: " + userName + " encontrado.");
 
