@@ -2,6 +2,7 @@ package br.pucbr.exemplo.usuario.controller;
 
 import br.pucbr.exemplo.usuario.entity.Usuario;
 import br.pucbr.exemplo.usuario.service.UsuarioService;
+import br.pucbr.exemplo.util.excecao.ExcecaoExemplo;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<?> salvar(@RequestBody Usuario usuario) {
+    public ResponseEntity<?> salvar(@RequestBody Usuario usuario) throws ExcecaoExemplo {
         usuario = usuarioService.salvar(usuario);
         return new ResponseEntity<>(usuario, HttpStatus.CREATED);
     }
