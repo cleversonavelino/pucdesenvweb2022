@@ -15,7 +15,9 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     public Usuario salvar(Usuario usuario) throws ExcecaoExemplo {
-        if (usuario.getNome() == null || usuario.getNome().equals("") || usuario.getNome().length() > 300) {
+        if (usuario.getNome() == null ||
+                usuario.getNome().equals("") ||
+                usuario.getNome().length() > 300) {
             //lanco um erro
             throw new ExcecaoExemplo("ERR001","O dados dos usuário estão errados manow.");
         }
