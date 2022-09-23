@@ -3,7 +3,9 @@ package br.pucbr.exemplo.usuario.service;
 import br.pucbr.exemplo.usuario.entity.Usuario;
 import br.pucbr.exemplo.usuario.repository.UsuarioRepository;
 import br.pucbr.exemplo.util.excecao.ExcecaoExemplo;
+import br.pucbr.exemplo.veiculo.FeignVeiculo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,9 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private FeignVeiculo feignVeiculo;
 
     public Usuario salvar(Usuario usuario) throws ExcecaoExemplo {
         if (usuario.getNome() == null ||
@@ -26,6 +31,9 @@ public class UsuarioService {
     }
 
     public List<Usuario> listar() {
+        String abc = feignVeiculo.testarVeiculo();
+
+
         return usuarioRepository.findAll();
     }
 
