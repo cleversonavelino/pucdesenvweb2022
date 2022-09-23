@@ -4,6 +4,7 @@ import br.pucbr.exemplo.usuario.entity.Usuario;
 import br.pucbr.exemplo.usuario.repository.UsuarioRepository;
 import br.pucbr.exemplo.util.excecao.ExcecaoExemplo;
 import br.pucbr.exemplo.veiculo.FeignVeiculo;
+import br.pucbr.exemplo.veiculo.VeiculoTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.stereotype.Service;
@@ -31,10 +32,13 @@ public class UsuarioService {
     }
 
     public List<Usuario> listar() {
-        String abc = feignVeiculo.testarVeiculo();
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        for (Usuario u : usuarios) {
+            VeiculoTo veiculo = feignVeiculo.buscarPorGuidUsuario(u.getId());
 
-
-        return usuarioRepository.findAll();
+            u.setVeiculoTo(veiculo);
+        }
+        return usuarios;
     }
 
     public Usuario buscarPorId(Integer id) {

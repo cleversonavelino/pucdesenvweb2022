@@ -1,11 +1,14 @@
 package br.pucbr.exemplo.usuario.entity;
 
+import br.pucbr.exemplo.veiculo.VeiculoTo;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "USUARIO")
@@ -23,6 +26,9 @@ public class Usuario {
 
     @Column(name = "SENHA", nullable = false)
     private String senha;
+
+    @Transient
+    private VeiculoTo veiculoTo;
 
     public Integer getId() {
         return id;
@@ -54,5 +60,13 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public VeiculoTo getVeiculoTo() {
+        return veiculoTo;
+    }
+
+    public void setVeiculoTo(VeiculoTo veiculoTo) {
+        this.veiculoTo = veiculoTo;
     }
 }
