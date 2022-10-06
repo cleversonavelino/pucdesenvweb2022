@@ -33,11 +33,11 @@ public class UsuarioService {
 
     public List<Usuario> listar() {
         List<Usuario> usuarios = usuarioRepository.findAll();
-        for (Usuario u : usuarios) {
+        /*for (Usuario u : usuarios) {
             VeiculoTo veiculo = feignVeiculo.buscarPorGuidUsuario(u.getId());
 
             u.setVeiculoTo(veiculo);
-        }
+        }*/
         return usuarios;
     }
 

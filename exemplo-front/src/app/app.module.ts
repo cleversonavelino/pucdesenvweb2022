@@ -7,6 +7,7 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MatInputModule} from '@angular/material/input';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

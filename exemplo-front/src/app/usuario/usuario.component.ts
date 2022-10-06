@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioModel } from './model/usuario.model';
+import { UsuarioService } from './service/usuario.service';
 
 @Component({
   selector: 'app-usuario',
@@ -7,18 +9,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsuarioComponent implements OnInit {
 
-  codigo: number = 0;
+  id: number = 0;
   nome: string = '';
-  dataNascimento: any;
+  login: string = '';;
+  senha: string = '';;
 
-  constructor() { }
+  constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
   }
 
   salvar() {
-    console.log('codigo ' + this.codigo);
+    console.log('id ' + this.id);
     console.log('nome ' + this.nome);
-    console.log('dataNascimento ' + this.dataNascimento);
+    console.log('login ' + this.login);
+    console.log('senha ' + this.senha);
+
+    let usuario = new UsuarioModel();
+    usuario.id = this.id;
+    usuario.nome = this.nome;
+    usuario.login = this.login;
+    usuario.senha = this.senha;
+
+    this.usuarioService.salvar(usuario).subscribe(usuarioRetorno => {
+      console.log('funcionou');
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  listar() {
+    this.usuarioService.listar().subscribe(usuarios => {
+      console.log(usuarios);
+    });
   }
 }
