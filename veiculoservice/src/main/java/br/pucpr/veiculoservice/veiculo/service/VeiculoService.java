@@ -1,5 +1,6 @@
 package br.pucpr.veiculoservice.veiculo.service;
 
+import br.pucpr.veiculoservice.producer.QueueSender;
 import br.pucpr.veiculoservice.veiculo.entity.Veiculo;
 import br.pucpr.veiculoservice.veiculo.repository.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,12 @@ public class VeiculoService {
     @Autowired
     private VeiculoRepository veiculoRepository;
 
+    @Autowired
+    private QueueSender queueSender;
+
     public Veiculo salvar(Veiculo veiculo) {
+        queueSender.send("guidusuario: "+veiculo.getGuidUsuario());
+
         return veiculoRepository.save(veiculo);
     }
 
