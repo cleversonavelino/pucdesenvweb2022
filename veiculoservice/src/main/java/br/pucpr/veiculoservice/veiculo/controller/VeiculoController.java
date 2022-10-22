@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import java.util.List;
 
 @RestController
@@ -20,7 +22,7 @@ public class VeiculoController {
     private VeiculoService veiculoService;
 
     @PostMapping
-    public Veiculo salvar(@RequestBody Veiculo veiculo) {
+    public Veiculo salvar(@RequestBody Veiculo veiculo) throws JsonProcessingException {
         return veiculoService.salvar(veiculo);
     }
 

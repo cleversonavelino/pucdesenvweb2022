@@ -6,6 +6,9 @@ import br.pucpr.veiculoservice.veiculo.repository.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.List;
 
 @Service
@@ -17,8 +20,9 @@ public class VeiculoService {
     @Autowired
     private QueueSender queueSender;
 
-    public Veiculo salvar(Veiculo veiculo) {
-        queueSender.send("guidusuario: "+veiculo.getGuidUsuario());
+    public Veiculo salvar(Veiculo veiculo) throws JsonProcessingException {
+    	ObjectMapper mapper = new ObjectMapper();    	
+        queueSender.send(mapper.writeValueAsString(veiculo));
 
         return veiculoRepository.save(veiculo);
     }

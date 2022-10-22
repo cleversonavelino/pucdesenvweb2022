@@ -13,8 +13,8 @@ public class QueueSender {
     @Autowired
     private Queue queue;
 
-    public void send(String mensagem) {
-        rabbitTemplate.convertAndSend(this.queue.getName(), mensagem);
+    public void send(String json) {
+        rabbitTemplate.convertAndSend(this.queue.getName(), json);
     }
 
 }
