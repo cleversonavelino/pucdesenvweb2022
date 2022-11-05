@@ -33,11 +33,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
-
         try {
-
-            UserDetails u = new CustomUser("cleverson",
-                    "$2a$12$LlxKRPHgE2I41V9o2hcN5ud.4dRUA67QCZhDUbh9C6GevJBoyoPo2",
+            UserDetails u = new CustomUser("admin",
+                    "$2a$12$Bvd65HT/xM4JZHdTnbtjZOcpJ4XMGybT1n5476cf/SqRcRg0fBNSe",
                     true,
                     true,
                     true,
