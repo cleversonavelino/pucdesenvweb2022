@@ -9,14 +9,18 @@ import { UsuarioService } from './service/usuario.service';
 })
 export class UsuarioComponent implements OnInit {
 
+  displayedColumns: string[] = ['id', 'nome', 'login'];
+  dataSource : any;
+
   id: number = 0;
   nome: string = '';
-  login: string = '';;
-  senha: string = '';;
+  login: string = '';
+  senha: string = '';
 
   constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
+    this.listar();
   }
 
   salvar() {
@@ -40,7 +44,7 @@ export class UsuarioComponent implements OnInit {
 
   listar() {
     this.usuarioService.listar().subscribe(usuarios => {
-      console.log(usuarios);
+      this.dataSource = usuarios;
     });
   }
 }
