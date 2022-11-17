@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Autenticacao } from './model/login.model';
 import { LoginService } from './service/login.service';
 
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
     senha: new FormControl('',Validators.required),
   });
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -38,6 +40,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token',retorno.token);  
         
         //redireciono para tela principal
+        console.log("logou")
+        this.router.navigate(['/api/home']);
       });
       
     } else {

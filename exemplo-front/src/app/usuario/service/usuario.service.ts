@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsuarioModel } from '../model/usuario.model';
 
 @Injectable({
@@ -10,11 +10,24 @@ export class UsuarioService {
   constructor(private httpClient: HttpClient) { }
 
   salvar(usuarioModel: UsuarioModel) {
-    return this.httpClient.post<UsuarioModel>("http://localhost:8082/usuario",usuarioModel);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })
+    };
+    return this.httpClient.
+    post<UsuarioModel>("http://localhost:8082/usuario",usuarioModel, httpOptions);
   }
 
   listar() {
-    return this.httpClient.get<UsuarioModel[]>("http://localhost:8082/usuario");
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })
+    };
+    return this.httpClient.get<UsuarioModel[]>("http://localhost:8082/usuario",httpOptions);
   }
 
 }
