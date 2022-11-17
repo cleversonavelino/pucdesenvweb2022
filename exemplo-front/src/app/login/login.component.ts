@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Autenticacao } from './model/login.model';
+import { LoginService } from './service/login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +15,11 @@ export class LoginComponent implements OnInit {
   invalid: any;
 
   loginForm = new FormGroup({
-    login: new FormControl('',Validators.email),
+    login: new FormControl('',Validators.required),
     senha: new FormControl('',Validators.required),
   });
 
-  constructor() { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
   }
@@ -27,6 +29,17 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       console.log(this.loginForm.get('login')?.value);
       console.log(this.loginForm.get('senha')?.value);
+
+      let autenticacao = new Autenticacao();
+      autenticacao.login = this.loginForm.get('login')?.value;
+      autenticacao.senha = this.loginForm.get('senha')?.value;
+      
+      this.loginService.login(autenticacao).subscribe(retorno => {
+        localStorage.setItem('token',retorno.token);  
+        
+        //redireciono para tela principal
+      });
+      
     } else {
       console.log("erro");
     }
