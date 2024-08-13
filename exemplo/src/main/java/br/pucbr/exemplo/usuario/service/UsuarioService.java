@@ -8,6 +8,7 @@ import br.pucbr.exemplo.veiculo.VeiculoTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,27 +18,23 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private FeignVeiculo feignVeiculo;
+    //@Autowired
+    //private FeignVeiculo feignVeiculo;
 
+    //@Transactional()
     public Usuario salvar(Usuario usuario) throws ExcecaoExemplo {
-        if (usuario.getNome() == null ||
-                usuario.getNome().equals("") ||
-                usuario.getNome().length() > 300) {
+        //if (usuario.getNome() == null ||
+        //        usuario.getNome().equals("") ||
+        //        usuario.getNome().length() > 300) {
             //lanco um erro
-            throw new ExcecaoExemplo("ERR001","O dados dos usuário estão errados manow.");
-        }
+        //    throw new ExcecaoExemplo("ERR001","O dados dos usuário estão errados manow.");
+        //}
 
         return usuarioRepository.save(usuario);
     }
 
     public List<Usuario> listar() {
         List<Usuario> usuarios = usuarioRepository.findAll();
-        /*for (Usuario u : usuarios) {
-            VeiculoTo veiculo = feignVeiculo.buscarPorGuidUsuario(u.getId());
-
-            u.setVeiculoTo(veiculo);
-        }*/
         return usuarios;
     }
 
@@ -48,5 +45,11 @@ public class UsuarioService {
     public void excluir(Integer id) {
         usuarioRepository.deleteById(id);
     }
+
+     /*for (Usuario u : usuarios) {
+            VeiculoTo veiculo = feignVeiculo.buscarPorGuidUsuario(u.getId());
+
+            u.setVeiculoTo(veiculo);
+        }*/
 
 }
