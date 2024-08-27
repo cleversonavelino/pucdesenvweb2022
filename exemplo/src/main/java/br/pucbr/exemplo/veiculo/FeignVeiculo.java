@@ -7,11 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@FeignClient("veiculoservice")
+@FeignClient(name="veiculoService", url = "http://localhost:8081")
 public interface FeignVeiculo {
-
-    //@GetMapping("/api/veiculo")
-    //String testarVeiculo();
 
     @GetMapping("/veiculo/usuario/{id}")
     public VeiculoTo buscarPorGuidUsuario(@PathVariable("id") Integer guidUsuario);
