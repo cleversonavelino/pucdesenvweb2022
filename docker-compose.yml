@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  web:
+    build: ./register    
+    ports:
+      - 127.0.0.1:8761:8761
+  web-2:
+      build: ./apigateway    
+      ports:
+        - 127.0.0.1:8761:8761
