@@ -10,8 +10,7 @@ public class VeiculoTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String placa;
-
-	private Integer guidUsuario;
+	private String multa;
 
 	public Integer getId() {
 		return id;
@@ -29,12 +28,11 @@ public class VeiculoTO implements Serializable {
 		this.placa = placa;
 	}
 
-	public Integer getGuidUsuario() {
-		return guidUsuario;
+	public String getMulta() {
+		return multa;
 	}
 
-	public void setGuidUsuario(Integer guidUsuario) {
-		this.guidUsuario = guidUsuario;
+	public void setMulta(String multa) {
+		this.multa = multa;
 	}
-
 }
