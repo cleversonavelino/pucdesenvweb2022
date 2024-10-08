@@ -1,6 +1,7 @@
 package br.pucpr.veiculoservice.veiculo.service;
 
 import br.pucpr.veiculoservice.producer.QueueSender;
+import br.pucpr.veiculoservice.producer.RequestProducer;
 import br.pucpr.veiculoservice.veiculo.entity.Veiculo;
 import br.pucpr.veiculoservice.veiculo.repository.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,15 @@ public class VeiculoService {
     @Autowired
     private QueueSender queueSender;
 
+    @Autowired
+    private RequestProducer requestProducer;
+
     public Veiculo salvar(Veiculo veiculo) throws JsonProcessingException {
-    	ObjectMapper mapper = new ObjectMapper();    	
-        queueSender.send(mapper.writeValueAsString(veiculo));
+        //enviar mensagem para o rabbit mq
+    	//ObjectMapper mapper = new ObjectMapper();
+        //queueSender.send(mapper.writeValueAsString(veiculo));
+
+        requestProducer.sendMessage(veiculo);
 
         return veiculoRepository.save(veiculo);
     }
